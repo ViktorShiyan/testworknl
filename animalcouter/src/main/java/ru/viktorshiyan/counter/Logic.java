@@ -16,7 +16,7 @@ public class Logic {
      * @param rule правило
      * @return количество вхождений по правилам
      */
-    public int counter(List<Animal> list, Rule rule) {
+    public int counter(List<Animal> list, ArrayList<Rule> rule) {
         List<Animal> animalList = this.filterWeight(list, rule);
         animalList = this.filterHeight(animalList, rule);
         animalList = this.filterType(animalList, rule);
@@ -30,24 +30,34 @@ public class Logic {
      * @param r    правило
      * @return отфильтрованный список
      */
-    private List<Animal> filterWeight(List<Animal> list, Rule r) {
+    private List<Animal> filterWeight(List<Animal> list, ArrayList<Rule> r) {
         List<Animal> animalList = new ArrayList<>();
-        if (r.getWeight().equals("")) {
+        boolean ruleEmpty = true;
+        for (Rule rule : r) {
+            if (!rule.getWeight().equals("")) {
+                ruleEmpty = false;
+                break;
+            }
+        }
+        if (ruleEmpty) {
             return list;
         }
-        if (r.isWeight()) {
-            for (Animal animal : list) {
-                if (animal.getWeight().equals(r.getWeight())) {
-                    animalList.add(animal);
+        for (Rule rule : r) {
+            if (rule.isWeight()) {
+                for (Animal animal : list) {
+                    if (animal.getWeight().equals(rule.getWeight())) {
+                        animalList.add(animal);
+                    }
                 }
-            }
-        } else {
-            for (Animal animal : list) {
-                if (!animal.getWeight().equals(r.getWeight())) {
-                    animalList.add(animal);
+            } else {
+                for (Animal animal : list) {
+                    if (!animal.getWeight().equals(rule.getWeight())) {
+                        animalList.add(animal);
+                    }
                 }
             }
         }
+
         return animalList;
     }
 
@@ -58,24 +68,34 @@ public class Logic {
      * @param r    правило
      * @return отфильтрованный список
      */
-    private List<Animal> filterHeight(List<Animal> list, Rule r) {
+    private List<Animal> filterHeight(List<Animal> list, ArrayList<Rule> r) {
         List<Animal> animalList = new ArrayList<>();
-        if (r.getHeight().equals("")) {
+        boolean ruleEmpty = true;
+        for (Rule rule : r) {
+            if (!rule.getHeight().equals("")) {
+                ruleEmpty = false;
+                break;
+            }
+        }
+        if (ruleEmpty) {
             return list;
         }
-        if (r.isHeight()) {
-            for (Animal animal : list) {
-                if (animal.getHeight().equals(r.getHeight())) {
-                    animalList.add(animal);
+        for (Rule rule : r) {
+            if (rule.isHeight()) {
+                for (Animal animal : list) {
+                    if (animal.getHeight().equals(rule.getHeight())) {
+                        animalList.add(animal);
+                    }
                 }
-            }
-        } else {
-            for (Animal animal : list) {
-                if (!animal.getHeight().equals(r.getHeight())) {
-                    animalList.add(animal);
+            } else {
+                for (Animal animal : list) {
+                    if (!animal.getHeight().equals(rule.getHeight())) {
+                        animalList.add(animal);
+                    }
                 }
             }
         }
+
         return animalList;
     }
 
@@ -86,24 +106,34 @@ public class Logic {
      * @param r    правило
      * @return отфильтрованный список
      */
-    private List<Animal> filterType(List<Animal> list, Rule r) {
+    private List<Animal> filterType(List<Animal> list, ArrayList<Rule> r) {
         List<Animal> animalList = new ArrayList<>();
-        if (r.getType().equals("")) {
+        boolean ruleEmpty = true;
+        for (Rule rule : r) {
+            if (!rule.getType().equals("")) {
+                ruleEmpty = false;
+                break;
+            }
+        }
+        if (ruleEmpty) {
             return list;
         }
-        if (r.isType()) {
-            for (Animal animal : list) {
-                if (animal.getType().equals(r.getType())) {
-                    animalList.add(animal);
+        for (Rule rule : r) {
+            if (rule.isType()) {
+                for (Animal animal : list) {
+                    if (animal.getType().equals(rule.getType())) {
+                        animalList.add(animal);
+                    }
                 }
-            }
-        } else {
-            for (Animal animal : list) {
-                if (!animal.getType().equals(r.getType())) {
-                    animalList.add(animal);
+            } else {
+                for (Animal animal : list) {
+                    if (!animal.getType().equals(rule.getType())) {
+                        animalList.add(animal);
+                    }
                 }
             }
         }
+
         return animalList;
     }
 }

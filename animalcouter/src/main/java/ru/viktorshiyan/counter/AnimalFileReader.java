@@ -45,15 +45,19 @@ public class AnimalFileReader {
      * @param path путь к файлу правил
      * @return правило
      */
-    public static Rule readFileRules(String path) {
-        Rule result = new Rule();
+    public static ArrayList<Rule> readFileRules(String path) {
+        ArrayList<Rule> result = new ArrayList<>();
         try {
             File file = new File(path);
             FileReader fr = new FileReader(file);
             BufferedReader reader = new BufferedReader(fr);
             String line = reader.readLine();
-            String[] arr = line.split(",");
-            result = new Rule(arr[0], arr[1], arr[2]);
+            String[] arr;
+            while (line != null) {
+                arr = line.split(",");
+                result.add(new Rule(arr[0], arr[1], arr[2]));
+                line = reader.readLine();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -25,9 +25,9 @@ public class AnimalFileReaderTest extends TestCase {
      * Проверка правильности считывания правил
      */
     public void testReadFileRules() {
-        Rule rule = AnimalFileReader.readFileRules("src/test/resources/rules3.tw");
-        assertEquals("Правило отличается", "ВЫСОКОЕ", rule.getHeight());
-        assertEquals("Правило отличается", "ТЯЖЕЛОЕ", rule.getWeight());
-        assertFalse("Праметр в правиле отличается", rule.isHeight());
+        ArrayList<Rule> rule = AnimalFileReader.readFileRules("src/test/resources/rules3.tw");
+        assertEquals("Правило отличается", "ВЫСОКОЕ", rule.get(0).getHeight());
+        assertEquals("Правило отличается", "", rule.get(0).getWeight());
+        assertFalse("Праметр в правиле отличается", rule.get(0).isHeight());
     }
 }
