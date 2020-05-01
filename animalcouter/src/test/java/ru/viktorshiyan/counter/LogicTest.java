@@ -38,4 +38,14 @@ public class LogicTest extends TestCase {
         Logic logic = new Logic();
         assertEquals("Колличество подходящих животных не соответсвует", logic.counter(animals, rule), 7);
     }
+
+    /**
+     * Проверка логики с правилом ,,ТРАВОЯДНОЕ
+     */
+    public void testWhenCounterWithRule4() {
+        ArrayList<Animal> animals = AnimalFileReader.readFileAnimals("src/test/resources/animals.tw");
+        Rule rule = AnimalFileReader.readFileRules("src/test/resources/rules4.tw");
+        Logic logic = new Logic();
+        assertEquals("Колличество подходящих животных не соответсвует", logic.counter(animals, rule), 6);
+    }
 }
