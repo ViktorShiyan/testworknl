@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.org/ViktorShiyan/testworknl.svg?branch=master)](https://travis-ci.org/ViktorShiyan/testworknl)
+
+[![codecov](https://codecov.io/gh/ViktorShiyan/testworknl/branch/master/graph/badge.svg)](https://codecov.io/gh/ViktorShiyan/testworknl)
+
 # Тестовое задание
 [текст задания](https://github.com/ViktorShiyan/testworknl/blob/master/task.md)
 
