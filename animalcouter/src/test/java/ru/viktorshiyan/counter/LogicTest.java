@@ -51,4 +51,14 @@ public class LogicTest extends TestCase {
         Logic logic = new Logic();
         assertEquals("Колличество подходящих животных не соответсвует", logic.counter(animals, rule), 6);
     }
+
+    /**
+     * Проверка логики с правилом ТЯЖЕЛОЕ,!ВЫСОКОЕ,
+     */
+    public void testWhenCounterWithRule5() {
+        ArrayList<Animal> animals = AnimalFileReader.readFileAnimals("src/test/resources/animals.tw");
+        ArrayList<Rule> rule = AnimalFileReader.readFileRules("src/test/resources/rules5.tw");
+        Logic logic = new Logic();
+        assertEquals("Колличество подходящих животных не соответсвует", logic.counter(animals, rule), 5);
+    }
 }

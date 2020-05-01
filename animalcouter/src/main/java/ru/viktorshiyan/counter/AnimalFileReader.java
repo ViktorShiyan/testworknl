@@ -55,6 +55,9 @@ public class AnimalFileReader {
             String[] arr;
             while (line != null) {
                 arr = line.split(",");
+                if (arr.length == 2) {
+                    arr = new String[]{arr[0], arr[1], ""};
+                }
                 result.add(new Rule(arr[0], arr[1], arr[2]));
                 line = reader.readLine();
             }
