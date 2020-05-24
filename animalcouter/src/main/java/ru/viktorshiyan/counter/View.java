@@ -13,7 +13,7 @@ import java.util.Scanner;
  * @author viktorshiyan
  */
 public class View {
-    public static void main(String[] args) {
+  /*  public static void main(String[] args) {
         String path;
         ArrayList<Animal> animals;
         ArrayList<Rule> rule;
@@ -36,5 +36,5 @@ public class View {
             }
 
         }
-    }
+    }*/
 }

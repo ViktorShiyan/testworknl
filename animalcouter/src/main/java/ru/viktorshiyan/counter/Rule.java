@@ -5,31 +5,41 @@ package ru.viktorshiyan.counter;
  *
  * @author viktorshiyan
  */
-public class Rule extends Animal {
+public class Rule {
     private boolean isWeight = true;
     private boolean isHeight = true;
     private boolean isType = true;
 
+    private String weight;
+    private String height;
+    private String type;
+
     /**
      * Конструктор класса
      *
-     * @param weight вес животного
-     * @param height рост животного
-     * @param type   тип животного
+     * @param weight вес
+     * @param height рост
+     * @param type   тип
      */
     public Rule(String weight, String height, String type) {
-        super(weight, height, type);
+
         if (weight.startsWith("!")) {
             this.isWeight = false;
             this.setWeight(weight.substring(1));
+        } else {
+            this.weight = weight;
         }
         if (height.startsWith("!")) {
             this.isHeight = false;
             this.setHeight(height.substring(1));
+        } else {
+            this.height = height;
         }
         if (type.startsWith("!")) {
             this.isType = false;
             this.setType(type.substring(1));
+        } else {
+            this.type = type;
         }
     }
 
@@ -37,7 +47,9 @@ public class Rule extends Animal {
      * Конструктор для создания пустого правила
      */
     public Rule() {
-        super("", "", "");
+        this.height = "";
+        this.weight = "";
+        this.type = "";
     }
 
     public boolean isWeight() {
@@ -50,5 +62,29 @@ public class Rule extends Animal {
 
     public boolean isType() {
         return isType;
+    }
+
+    public String getWeight() {
+        return weight;
+    }
+
+    public String getHeight() {
+        return height;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setWeight(String weight) {
+        this.weight = weight;
+    }
+
+    public void setHeight(String height) {
+        this.height = height;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

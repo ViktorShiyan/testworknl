@@ -10,25 +10,90 @@ import java.util.ArrayList;
 public class LogicTest extends TestCase {
 
     /**
-     * Проверка логики с правилом ,!ВЫСОКОЕ,ВСЕЯДНОЕ
+     * ,!ВЫСОКОЕ,ВСЕЯДНОЕ
      */
-    public void testWhenCounterWithRule3() {
-        ArrayList<Animal> animals = AnimalFileReader.readFileAnimals("src/test/resources/animals.tw");
-        ArrayList<Rule> rule = AnimalFileReader.readFileRules("src/test/resources/rules3.tw");
+    public void testLogicFilterAllTrue() {
         Logic logic = new Logic();
-        assertEquals("Колличество подходящих животных не соответсвует", logic.counter(animals, rule), 5);
+        Animal animal = new Animal("", "!ВЫСОКОЕ", "ВСЕЯДНОЕ");
+        ArrayList<Rule> rule = AnimalFileReader.readFileRules("src/test/resources/rules3.tw");
+        assertTrue(logic.filterWeight(animal, rule));
+        assertTrue(logic.filterHeight(animal, rule));
+        assertTrue(logic.filterType(animal, rule));
     }
 
     /**
-     * Проверка логики с правилом ,МАЛЕНЬКОЕ,ТРАВОЯДНОЕ
-     *                            ,МАЛЕНЬКОЕ,ПЛОТОЯДНОЕ
+     * !ТЯЖЕЛОЕ,!ВЫСОКОЕ,!ВСЕЯДНОЕ
+     */
+    public void testLogicFilterAllFalse() {
+        Logic logic = new Logic();
+        ArrayList<Rule> rule = AnimalFileReader.readFileRules("src/test/resources/rules4.tw");
+        Animal animal = new Animal("ТЯЖЕЛОЕ", "ВЫСОКОЕ", "ВСЕЯДНОЕ");
+        assertFalse(logic.filterWeight(animal, rule));
+        assertFalse(logic.filterHeight(animal, rule));
+        assertFalse(logic.filterType(animal, rule));
+        animal = new Animal("ЛЕГКОЕ", "НИЗКОЕ", "ТРАВОЯДНОЕ");
+        assertTrue(logic.filterWeight(animal, rule));
+        assertTrue(logic.filterHeight(animal, rule));
+        assertTrue(logic.filterType(animal, rule));
+    }
+
+    /**
+     * ,МАЛЕНЬКОЕ,ТРАВОЯДНОЕ
+     * ,МАЛЕНЬКОЕ,ПЛОТОЯДНОЕ
+     */
+    public void testLogicFilterRulesAND() {
+        Logic logic = new Logic();
+        ArrayList<Rule> rule = AnimalFileReader.readFileRules("src/test/resources/rules2.tw");
+        Animal animal = new Animal("ТЯЖЕЛОЕ", "МАЛЕНЬКОЕ", "ТРАВОЯДНОЕ");
+        assertTrue(logic.filterWeight(animal, rule));
+        assertTrue(logic.filterHeight(animal, rule));
+        assertTrue(logic.filterType(animal, rule));
+        animal = new Animal("ТЯЖЕЛОЕ", "МАЛЕНЬКОЕ", "ПЛОТОЯДНОЕ");
+        assertTrue(logic.filterWeight(animal, rule));
+        assertTrue(logic.filterHeight(animal, rule));
+        assertTrue(logic.filterType(animal, rule));
+        animal = new Animal("ТЯЖЕЛОЕ", "ВЫСОКОЕ", "ВСЕЯДНОЕ");
+        assertTrue(logic.filterWeight(animal, rule));
+        assertFalse(logic.filterHeight(animal, rule));
+        assertFalse(logic.filterType(animal, rule));
+    }
+
+    /**
+     * ,МАЛЕНЬКОЕ,ТРАВОЯДНОЕ
+     * ,МАЛЕНЬКОЕ,ПЛОТОЯДНОЕ
+     */
+    public void testLogicFilterURules() {
+        Logic logic = new Logic();
+        ArrayList<Rule> rule = AnimalFileReader.readFileRules("src/test/resources/rules2.tw");
+        Animal animal = new Animal("ТЯЖЕЛОЕ", "МАЛЕНЬКОЕ", "ТРАВОЯДНОЕ");
+        assertTrue(logic.filterAll(animal, rule));
+        animal = new Animal("ТЯЖЕЛОЕ", "ВЫСОКОЕ", "ВСЕЯДНОЕ");
+        assertFalse(logic.filterAll(animal, rule));
+    }
+
+    /**
+     * Проверка логики с правилом ,!ВЫСОКОЕ,ВСЕЯДНОЕ
+     */
+    public void testWhenCounterWithRule3() {
+        String pathAnimals = "src/test/resources/animals.tw";
+        String pathRule = "src/test/resources/rules3.tw";
+        String message = "Колличество подходящих животных не соответсвует";
+        Logic logic = new Logic();
+        assertEquals(message, logic.counter(pathAnimals, pathRule), 5);
+    }
+
+    /**
+     * Проверка логики с правилом
+     * ,МАЛЕНЬКОЕ,ТРАВОЯДНОЕ
+     * ,МАЛЕНЬКОЕ,ПЛОТОЯДНОЕ
      * Травоядное или плотоядное и они при этом маленькие
      */
     public void testWhenCounterWithRule2() {
-        ArrayList<Animal> animals = AnimalFileReader.readFileAnimals("src/test/resources/animals.tw");
-        ArrayList<Rule> rule = AnimalFileReader.readFileRules("src/test/resources/rules2.tw");
+        String pathAnimals = "src/test/resources/animals.tw";
+        String pathRule = "src/test/resources/rules2.tw";
+        String message = "Колличество подходящих животных не соответсвует";
         Logic logic = new Logic();
-        assertEquals("Колличество подходящих животных не соответсвует", logic.counter(animals, rule), 6);
+        assertEquals(message, logic.counter(pathAnimals, pathRule), 3);
     }
 
     /**
@@ -36,29 +101,32 @@ public class LogicTest extends TestCase {
      * Животные только травоядные
      */
     public void testWhenCounterWithRule1() {
-        ArrayList<Animal> animals = AnimalFileReader.readFileAnimals("src/test/resources/animals.tw");
-        ArrayList<Rule> rule = AnimalFileReader.readFileRules("src/test/resources/rules1.tw");
+        String pathAnimals = "src/test/resources/animals.tw";
+        String pathRule = "src/test/resources/rules1.tw";
+        String message = "Колличество подходящих животных не соответсвует";
         Logic logic = new Logic();
-        assertEquals("Колличество подходящих животных не соответсвует", logic.counter(animals, rule), 7);
+        assertEquals(message, logic.counter(pathAnimals, pathRule), 7);
     }
 
     /**
      * Проверка логики с правилом !ТЯЖЕЛОЕ,!ВЫСОКОЕ,!ВСЕЯДНОЕ
      */
     public void testWhenCounterWithRule4() {
-        ArrayList<Animal> animals = AnimalFileReader.readFileAnimals("src/test/resources/animals.tw");
-        ArrayList<Rule> rule = AnimalFileReader.readFileRules("src/test/resources/rules4.tw");
+        String pathAnimals = "src/test/resources/animals.tw";
+        String pathRule = "src/test/resources/rules4.tw";
+        String message = "Колличество подходящих животных не соответсвует";
         Logic logic = new Logic();
-        assertEquals("Колличество подходящих животных не соответсвует", logic.counter(animals, rule), 6);
+        assertEquals(message, logic.counter(pathAnimals, pathRule), 6);
     }
 
     /**
      * Проверка логики с правилом ТЯЖЕЛОЕ,!ВЫСОКОЕ,
      */
     public void testWhenCounterWithRule5() {
-        ArrayList<Animal> animals = AnimalFileReader.readFileAnimals("src/test/resources/animals.tw");
-        ArrayList<Rule> rule = AnimalFileReader.readFileRules("src/test/resources/rules5.tw");
+        String pathAnimals = "src/test/resources/animals.tw";
+        String pathRule = "src/test/resources/rules5.tw";
+        String message = "Колличество подходящих животных не соответсвует";
         Logic logic = new Logic();
-        assertEquals("Колличество подходящих животных не соответсвует", logic.counter(animals, rule), 5);
+        assertEquals(message, logic.counter(pathAnimals, pathRule), 5);
     }
 }
