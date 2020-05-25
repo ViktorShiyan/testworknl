@@ -43,14 +43,6 @@ public class Rule {
         }
     }
 
-    /**
-     * Конструктор для создания пустого правила
-     */
-    public Rule() {
-        this.height = "";
-        this.weight = "";
-        this.type = "";
-    }
 
     public boolean isWeight() {
         return isWeight;

@@ -25,33 +25,6 @@ public class Animal {
     }
 
     /**
-     * Метод для установки веса
-     *
-     * @param weight вес
-     */
-    public void setWeight(String weight) {
-        this.weight = weight;
-    }
-
-    /**
-     * Метод для установки роста
-     *
-     * @param height рост
-     */
-    public void setHeight(String height) {
-        this.height = height;
-    }
-
-    /**
-     * Метод установки типа
-     *
-     * @param type тип
-     */
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    /**
      * Метод для получения значения веса
      *
      * @return вес
